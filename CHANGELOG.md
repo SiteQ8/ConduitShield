@@ -3,7 +3,7 @@
 ## [1.0.0] - 2026-03-10
 
 ### Initial Release
-- 9-dashboard interactive GUI platform
+- Interactive GUI platform with full OT security lifecycle
 - Login screen with demo credentials
 - Overpass Mono + Overpass typography (industrial aesthetic)
 - Amber (#D97706) accent on dark (#111214) background

@@ -15,7 +15,7 @@
   <rect x="208" y="145" width="80" height="24" rx="4" fill="#D9770620" stroke="#D97706" stroke-width="0.8"/><text x="248" y="161" text-anchor="middle" font-family="monospace" font-size="9" fill="#D97706" font-weight="600">RESPOND</text>
   <!-- Features -->
   <text x="40" y="195" font-family="monospace" font-size="9" fill="#52545C" letter-spacing="0.5">ASSET DISCOVERY · VULNERABILITY MGMT · MITRE ATT&amp;CK ICS · INCIDENT RESPONSE · ZONE/CONDUIT POLICY · IOT LIFECYCLE</text>
-  <text x="40" y="210" font-family="monospace" font-size="8" fill="#52545C" letter-spacing="0.5">ISA/IEC 62443 · NIST SP 800-82 · NERC CIP · CISA · 9 Dashboards · On-premises · @SiteQ8 — Ali AlEnezi · MIT</text>
+  <text x="40" y="210" font-family="monospace" font-size="8" fill="#52545C" letter-spacing="0.5">ISA/IEC 62443 · NIST SP 800-82 · NERC CIP · CISA · On-premises first · @SiteQ8 — Ali AlEnezi · MIT</text>
   <!-- Right side graphic -->
   <g transform="translate(700,60)" opacity="0.15">
     <rect x="0" y="0" width="160" height="100" rx="6" fill="none" stroke="#D97706" stroke-width="1"/>

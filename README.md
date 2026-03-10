@@ -9,11 +9,11 @@
 [![Standards](https://img.shields.io/badge/IEC_62443-Aligned-D97706?style=flat-square)]()
 [![NIST](https://img.shields.io/badge/NIST_800--82-Aligned-D97706?style=flat-square)]()
 [![ATT&CK](https://img.shields.io/badge/MITRE_ATT%26CK-ICS-D97706?style=flat-square)]()
-[![Dashboards](https://img.shields.io/badge/Dashboards-9-D97706?style=flat-square)]()
+[![Dashboards](https://img.shields.io/badge/Modules-9-D97706?style=flat-square)]()
 
 ### Passive-first cybersecurity for OT, ICS, and IIoT
 
-**One platform. Three modes. Nine dashboards.**
+**One platform. Three modes. Full OT lifecycle security.**
 
 [Live Dashboard](https://siteq8.github.io/ConduitShield) · [Features](#features) · [Architecture](#architecture) · [Standards](#standards-alignment) · [Quick Start](#quick-start)
 
@@ -57,19 +57,19 @@ ConduitShield is **built for OT from the ground up**:
 | **Defend** | Access control, segmentation enforcement, vulnerability management, IoT lifecycle |
 | **Respond** | Detection engineering, incident cases, OT playbooks, evidence preservation |
 
-### Nine Dashboards
+### Platform Modules
 
-| # | Dashboard | Capability |
-|---|-----------|------------|
-| 1 | **Dashboard** | Security posture overview: 2,461 assets, Purdue Model zone health, real-time alerts, compliance score |
-| 2 | **Assets** | Passive-discovered inventory: vendor, model, firmware, protocol, Purdue zone, IP, vulnerability status. 10 asset types across all Purdue levels |
-| 3 | **Access** | Remote session monitoring with MFA enforcement, JIT access, session recording. Default credential detection with 3 active alerts |
-| 4 | **Vulnerabilities** | Firmware/software correlation against ICS-CERT advisories. 6 real CVEs matched to inventory with CVSS scores, patch status, compensating controls |
-| 5 | **IoT Controls** | Device onboarding queue, firmware update tracking with signature verification, certificate lifecycle, secure configuration compliance |
-| 6 | **Detection** | MITRE ATT&CK for ICS mapping: 47 techniques covered, 8 detection rules shown with tactic mapping and last-triggered timestamps |
-| 7 | **Incidents** | Active incident cases (P1-P4), OT-specific playbook for unauthorized PLC write (6-step: Isolate → Verify → Preserve → Assess → Restore → Report) |
-| 8 | **Segmentation** | Zone/conduit policy builder: 12 zones, 34 conduits. Policy enforcement table showing allowed protocols, violations, and breach status per conduit |
-| 9 | **Compliance** | Framework compliance: IEC 62443 (68%), NIST 800-82 (75%), NERC CIP (82%), MITRE ATT&CK (84%), CIS v8.1 (74%), CISA (65%). 1,247 total controls |
+| Module | Key Capabilities |
+|--------|-----------------|
+| **Overview** | Security posture: 2,461 assets, Purdue L0-L5 zone health with conduit counts, real-time alerts, communication baselines (normal protocol detection, rogue device, unauthorized protocol, polling anomaly) |
+| **Asset Intelligence** | Passive discovery (SPAN/TAP): vendor, model, serial, firmware, OS, protocol, zone, IP/MAC, owner, criticality. Auto-built topology with protocol map (Modbus, S7comm, OPC UA, EtherNet/IP, DNP3, MQTT). End-of-life tracking with compensating controls |
+| **Access & Identity** | JIT remote access with MFA, approval chains, session recording, one-click disconnect. Certificate-backed device trust. RBAC/ABAC role matrix (Operator, Engineer, Vendor, SOC, Admin). SSO/federation (SAML, OAuth2, AD). Default credential detection and forced replacement |
+| **Vulnerability & Patch** | ICS-CERT advisory correlation (6 real CVEs). OT patch workflow (assess → test offline → schedule outage → deploy → verify → rollback). SBOM ingest with component-to-asset mapping. Config drift detection with golden image comparison. Compensating control tracking |
+| **IoT Lifecycle** | Secure onboarding (4-gate: credentials, certificate, config, access controls). Firmware update validation (signature + SHA-256 checksum + rollback). Device state awareness (healthy/degraded/compromised). Key and certificate lifecycle. Logical access controls on interfaces, ports, APIs |
+| **Detection & Analytics** | 47 MITRE ATT&CK for ICS techniques. Process-aware anomaly detection: unexpected writes, unauthorized mode changes, unusual polling, scan storms, engineering uploads, abnormal inter-zone traffic. 14 event sources connected. Threat hunting queries |
+| **Incident Response** | P1-P4 cases with zone/conduit impact. OT playbooks with safety gates (never auto-disrupt without policy). Evidence locker (PCAPs, logs, PLC state, timelines) with chain of custody. Contact trees (operations, CISO, vendors, integrators, legal, external IR) |
+| **Segmentation Policy** | Zone/conduit policy with allowed protocols, ports, time windows. Change simulation with blast radius preview. DMZ architecture recommendations. Unidirectional gateway placement. Continuous traffic-vs-policy validation |
+| **Compliance & Audit** | 6 frameworks: IEC 62443, NIST 800-82, NERC CIP, ATT&CK ICS, CIS v8.1, CISA. 1,247 controls tracked. Audit-ready reports (assets, access, patches, EOL, incidents, exceptions). Platform deployment: on-prem first, lightweight collectors, store-and-forward, HA, API-first, multi-site |
 
 ---
 
