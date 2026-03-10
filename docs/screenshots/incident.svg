@@ -1,0 +1,55 @@
+<svg width="800" height="420" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="420" fill="#111214"/>
+  <rect x="10" y="10" width="380" height="400" rx="8" fill="#252830" stroke="#2E3038"/>
+  <text x="24" y="34" font-family="monospace" font-size="10" font-weight="700" fill="#D97706" letter-spacing="0.5">OT PLAYBOOK — UNAUTHORIZED PLC WRITE</text>
+  <g transform="translate(24,50)">
+    <circle cx="14" cy="14" r="14" fill="#D9770610" stroke="#D97706"/><text x="14" y="18" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#D97706">1</text>
+    <text x="38" y="12" font-family="system-ui" font-size="10" font-weight="700" fill="#D4D4D8">Isolate</text>
+    <text x="38" y="26" font-family="system-ui" font-size="8" fill="#8B8D94">Block source IP. Do NOT power cycle PLC.</text>
+    <text x="300" y="18" font-family="monospace" font-size="7" fill="#EF4444">⚠ SAFETY GATE</text>
+  </g>
+  <g transform="translate(24,100)">
+    <circle cx="14" cy="14" r="14" fill="#D9770610" stroke="#D97706"/><text x="14" y="18" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#D97706">2</text>
+    <text x="38" y="12" font-family="system-ui" font-size="10" font-weight="700" fill="#D4D4D8">Verify</text>
+    <text x="38" y="26" font-family="system-ui" font-size="8" fill="#8B8D94">Compare PLC program vs golden backup.</text>
+  </g>
+  <g transform="translate(24,150)">
+    <circle cx="14" cy="14" r="14" fill="#D9770610" stroke="#D97706"/><text x="14" y="18" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#D97706">3</text>
+    <text x="38" y="12" font-family="system-ui" font-size="10" font-weight="700" fill="#D4D4D8">Preserve</text>
+    <text x="38" y="26" font-family="system-ui" font-size="8" fill="#8B8D94">PCAP, PLC state, logs. Chain of custody.</text>
+  </g>
+  <g transform="translate(24,200)">
+    <circle cx="14" cy="14" r="14" fill="#D9770610" stroke="#D97706"/><text x="14" y="18" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#D97706">4</text>
+    <text x="38" y="12" font-family="system-ui" font-size="10" font-weight="700" fill="#D4D4D8">Assess</text>
+    <text x="38" y="26" font-family="system-ui" font-size="8" fill="#8B8D94">Verify physical process safe with operations.</text>
+    <text x="300" y="18" font-family="monospace" font-size="7" fill="#EF4444">⚠ SAFETY GATE</text>
+  </g>
+  <g transform="translate(24,250)">
+    <circle cx="14" cy="14" r="14" fill="#D9770610" stroke="#D97706"/><text x="14" y="18" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#D97706">5</text>
+    <text x="38" y="12" font-family="system-ui" font-size="10" font-weight="700" fill="#D4D4D8">Restore</text>
+    <text x="38" y="26" font-family="system-ui" font-size="8" fill="#8B8D94">Restore from verified backup. Re-enable monitoring.</text>
+  </g>
+  <g transform="translate(24,300)">
+    <circle cx="14" cy="14" r="14" fill="#D9770610" stroke="#D97706"/><text x="14" y="18" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#D97706">6</text>
+    <text x="38" y="12" font-family="system-ui" font-size="10" font-weight="700" fill="#D4D4D8">Report</text>
+    <text x="38" y="26" font-family="system-ui" font-size="8" fill="#8B8D94">CISO, plant manager, regulators. Lessons learned.</text>
+  </g>
+  <!-- Evidence Locker -->
+  <rect x="400" y="10" width="390" height="200" rx="8" fill="#252830" stroke="#2E3038"/>
+  <text x="414" y="34" font-family="monospace" font-size="10" font-weight="700" fill="#D97706" letter-spacing="0.5">EVIDENCE LOCKER — INC-089</text>
+  <text x="414" y="58" font-family="monospace" font-size="8" fill="#52545C">TYPE</text><text x="490" y="58" font-family="monospace" font-size="8" fill="#52545C">DESCRIPTION</text><text x="700" y="58" font-family="monospace" font-size="8" fill="#52545C">CUSTODY</text>
+  <line x1="414" y1="64" x2="776" y2="64" stroke="#2E3038"/>
+  <text x="414" y="80" font-family="monospace" font-size="9" fill="#8B8D94">PCAP</text><text x="490" y="80" font-family="system-ui" font-size="9" fill="#8B8D94">Modbus capture — 10.10.8.99</text><text x="700" y="80" font-family="monospace" font-size="8" fill="#52545C">SOC→Srv</text>
+  <text x="414" y="100" font-family="monospace" font-size="9" fill="#8B8D94">Logs</text><text x="490" y="100" font-family="system-ui" font-size="9" fill="#8B8D94">Firewall deny logs L1 zone</text><text x="700" y="100" font-family="monospace" font-size="8" fill="#52545C">SIEM→Lock</text>
+  <text x="414" y="120" font-family="monospace" font-size="9" fill="#8B8D94">PLC State</text><text x="490" y="120" font-family="system-ui" font-size="9" fill="#8B8D94">PLC-047 program + register dump</text><text x="700" y="120" font-family="monospace" font-size="8" fill="#52545C">OT-Eng→Srv</text>
+  <text x="414" y="140" font-family="monospace" font-size="9" fill="#8B8D94">Timeline</text><text x="490" y="140" font-family="system-ui" font-size="9" fill="#8B8D94">Full event timeline 14:00-14:35</text><text x="700" y="140" font-family="monospace" font-size="8" fill="#52545C">Auto-SIEM</text>
+  <!-- Contact Tree -->
+  <rect x="400" y="220" width="390" height="190" rx="8" fill="#252830" stroke="#2E3038"/>
+  <text x="414" y="244" font-family="monospace" font-size="10" font-weight="700" fill="#D97706" letter-spacing="0.5">CONTACT TREE — CRITICAL INCIDENTS</text>
+  <text x="414" y="270" font-family="system-ui" font-size="9" fill="#8B8D94">Plant Operations Manager</text><text x="760" y="270" font-family="monospace" font-size="8" fill="#EF4444" text-anchor="end">Immediate</text>
+  <text x="414" y="290" font-family="system-ui" font-size="9" fill="#8B8D94">CISO / Security Lead</text><text x="760" y="290" font-family="monospace" font-size="8" fill="#EF4444" text-anchor="end">&lt;15 min</text>
+  <text x="414" y="310" font-family="system-ui" font-size="9" fill="#8B8D94">Vendor (Siemens/ABB/Rockwell)</text><text x="760" y="310" font-family="monospace" font-size="8" fill="#F59E0B" text-anchor="end">&lt;1 hour</text>
+  <text x="414" y="330" font-family="system-ui" font-size="9" fill="#8B8D94">System Integrator</text><text x="760" y="330" font-family="monospace" font-size="8" fill="#F59E0B" text-anchor="end">&lt;2 hours</text>
+  <text x="414" y="350" font-family="system-ui" font-size="9" fill="#8B8D94">Legal / Regulatory</text><text x="760" y="350" font-family="monospace" font-size="8" fill="#06B6D4" text-anchor="end">&lt;4 hours</text>
+  <text x="414" y="370" font-family="system-ui" font-size="9" fill="#8B8D94">External IR / CERT</text><text x="760" y="370" font-family="monospace" font-size="8" fill="#06B6D4" text-anchor="end">&lt;4 hours</text>
+</svg>

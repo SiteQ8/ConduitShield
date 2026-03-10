@@ -47,6 +47,28 @@ ConduitShield is **built for OT from the ground up**:
 
 ---
 
+## Screenshots
+
+### Login Screen
+
+<img src="docs/screenshots/login.svg" width="100%" alt="ConduitShield — Login"/>
+
+> Demo credentials with click-to-fill. Certificate-backed device trust. Three operational modes: Discover, Defend, Respond.
+
+### Security Overview — Purdue Model, Alerts, Baselines
+
+<img src="docs/screenshots/overview.svg" width="100%" alt="ConduitShield — Overview"/>
+
+> Real-time security posture across 7 Purdue zones (L0-L5 + DMZ). Communication baselines detect unauthorized protocols, rogue devices, and polling anomalies. 2,461 monitored assets with 12 zones and 34 conduits.
+
+### Incident Response — OT Playbooks, Evidence Locker, Contact Tree
+
+<img src="docs/screenshots/incident.svg" width="100%" alt="ConduitShield — Incident Response"/>
+
+> Safety-aware 6-step playbook for unauthorized PLC writes with explicit safety gates. Evidence locker with chain of custody (PCAPs, logs, PLC state, timelines). Contact tree with SLA times for operations, CISO, vendors, integrators, legal, and external IR.
+
+---
+
 ## Features
 
 ### Three Modes

@@ -1,0 +1,20 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="500" fill="#111214"/>
+  <rect x="200" y="60" width="400" height="380" rx="12" fill="#18191D" stroke="#2E3038"/>
+  <text x="400" y="110" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#D97706">ConduitShield</text>
+  <text x="400" y="132" text-anchor="middle" font-family="system-ui" font-size="11" fill="#52545C">Passive-first cybersecurity for OT, ICS, and IIoT</text>
+  <text x="230" y="168" font-family="monospace" font-size="9" fill="#52545C" letter-spacing="0.5">USERNAME</text>
+  <rect x="220" y="175" width="360" height="36" rx="6" fill="#111214" stroke="#2E3038"/>
+  <text x="236" y="198" font-family="monospace" font-size="12" fill="#8B8D94">admin</text>
+  <text x="230" y="232" font-family="monospace" font-size="9" fill="#52545C" letter-spacing="0.5">PASSWORD</text>
+  <rect x="220" y="239" width="360" height="36" rx="6" fill="#111214" stroke="#2E3038"/>
+  <text x="236" y="262" font-family="monospace" font-size="12" fill="#8B8D94">••••••••••••</text>
+  <rect x="220" y="290" width="360" height="38" rx="6" fill="#D97706"/>
+  <text x="400" y="314" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#000">Sign In</text>
+  <rect x="220" y="345" width="360" height="80" rx="8" fill="#111214" stroke="#2E3038"/>
+  <text x="236" y="365" font-family="monospace" font-size="8" fill="#D97706" letter-spacing="0.5">DEMO CREDENTIALS</text>
+  <text x="236" y="385" font-family="monospace" font-size="11" fill="#8B8D94">Username:</text>
+  <rect x="316" y="373" width="52" height="18" rx="3" fill="none" stroke="#2E3038"/><text x="342" y="386" text-anchor="middle" font-family="monospace" font-size="10" fill="#D4D4D8">admin</text>
+  <text x="236" y="408" font-family="monospace" font-size="11" fill="#8B8D94">Password:</text>
+  <rect x="316" y="396" width="110" height="18" rx="3" fill="none" stroke="#2E3038"/><text x="371" y="409" text-anchor="middle" font-family="monospace" font-size="10" fill="#D4D4D8">OT@Secure2025</text>
+</svg>

@@ -1,0 +1,77 @@
+<svg width="800" height="520" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="520" fill="#111214"/>
+  <!-- Topbar -->
+  <rect x="0" y="0" width="800" height="48" fill="#18191D"/>
+  <text x="16" y="30" font-family="monospace" font-size="14" font-weight="700" fill="#D97706">ConduitShield</text>
+  <text x="138" y="30" font-family="monospace" font-size="9" fill="#52545C">v1.0</text>
+  <rect x="170" y="14" width="180" height="22" rx="6" fill="#111214" stroke="#2E3038"/>
+  <rect x="172" y="16" width="54" height="18" rx="4" fill="#D97706"/><text x="199" y="29" text-anchor="middle" font-family="monospace" font-size="8" font-weight="700" fill="#000">Discover</text>
+  <text x="255" y="29" text-anchor="middle" font-family="monospace" font-size="8" fill="#52545C">Defend</text>
+  <text x="325" y="29" text-anchor="middle" font-family="monospace" font-size="8" fill="#52545C">Respond</text>
+  <circle cx="700" cy="24" r="3" fill="#22C55E"/><text x="710" y="28" font-family="monospace" font-size="8" fill="#22C55E">PASSIVE</text>
+  <!-- Nav -->
+  <rect x="0" y="48" width="800" height="32" fill="#18191D"/>
+  <text x="16" y="68" font-family="monospace" font-size="9" font-weight="600" fill="#D97706">Overview</text>
+  <line x1="16" y1="77" x2="62" y2="77" stroke="#D97706" stroke-width="2"/>
+  <text x="90" y="68" font-family="monospace" font-size="9" fill="#52545C">Assets</text>
+  <text x="140" y="68" font-family="monospace" font-size="9" fill="#52545C">Access</text>
+  <text x="190" y="68" font-family="monospace" font-size="9" fill="#52545C">Vulnerabilities</text>
+  <text x="290" y="68" font-family="monospace" font-size="9" fill="#52545C">IoT Controls</text>
+  <text x="380" y="68" font-family="monospace" font-size="9" fill="#52545C">Detection</text>
+  <text x="450" y="68" font-family="monospace" font-size="9" fill="#52545C">Incidents</text>
+  <text x="530" y="68" font-family="monospace" font-size="9" fill="#52545C">Segmentation</text>
+  <text x="630" y="68" font-family="monospace" font-size="9" fill="#52545C">Compliance</text>
+  <!-- Metrics row -->
+  <g transform="translate(10,90)">
+    <rect x="0" y="0" width="125" height="65" rx="8" fill="#252830" stroke="#2E3038"/>
+    <text x="12" y="30" font-family="monospace" font-size="22" font-weight="700" fill="#D97706">2,461</text>
+    <text x="12" y="48" font-family="system-ui" font-size="9" fill="#52545C">Assets Monitored</text>
+    <rect x="130" y="0" width="125" height="65" rx="8" fill="#252830" stroke="#2E3038"/>
+    <text x="142" y="30" font-family="monospace" font-size="22" font-weight="700" fill="#06B6D4">12</text>
+    <text x="142" y="48" font-family="system-ui" font-size="9" fill="#52545C">Zones / 34 Conduits</text>
+    <rect x="260" y="0" width="125" height="65" rx="8" fill="#252830" stroke="#2E3038"/>
+    <text x="272" y="30" font-family="monospace" font-size="22" font-weight="700" fill="#EF4444">23</text>
+    <text x="272" y="48" font-family="system-ui" font-size="9" fill="#52545C">Critical Vulns</text>
+    <rect x="390" y="0" width="125" height="65" rx="8" fill="#252830" stroke="#2E3038"/>
+    <text x="402" y="30" font-family="monospace" font-size="22" font-weight="700" fill="#22C55E">71.5%</text>
+    <text x="402" y="48" font-family="system-ui" font-size="9" fill="#52545C">Compliance Score</text>
+    <rect x="520" y="0" width="125" height="65" rx="8" fill="#252830" stroke="#2E3038"/>
+    <text x="532" y="30" font-family="monospace" font-size="22" font-weight="700" fill="#A855F7">8</text>
+    <text x="532" y="48" font-family="system-ui" font-size="9" fill="#52545C">Remote Sessions</text>
+    <rect x="650" y="0" width="125" height="65" rx="8" fill="#252830" stroke="#2E3038"/>
+    <text x="662" y="30" font-family="monospace" font-size="22" font-weight="700" fill="#22C55E">47</text>
+    <text x="662" y="48" font-family="system-ui" font-size="9" fill="#52545C">ATT&amp;CK Techniques</text>
+  </g>
+  <!-- Purdue zones -->
+  <rect x="10" y="170" width="385" height="340" rx="8" fill="#252830" stroke="#2E3038"/>
+  <text x="24" y="192" font-family="monospace" font-size="10" font-weight="700" fill="#D97706" letter-spacing="0.5">PURDUE MODEL — ZONE HEALTH</text>
+  <rect x="24" y="204" width="355" height="28" rx="5" fill="#A855F710" stroke="#A855F730"/>
+  <text x="34" y="222" font-family="system-ui" font-size="10" font-weight="600" fill="#A855F7">L5 Enterprise</text><text x="280" y="222" font-family="monospace" font-size="8" fill="#8B8D94">142 assets · 2 findings</text>
+  <rect x="24" y="236" width="355" height="28" rx="5" fill="#3B82F610" stroke="#3B82F630"/>
+  <text x="34" y="254" font-family="system-ui" font-size="10" font-weight="600" fill="#3B82F6">L4 Site Business</text><text x="280" y="254" font-family="monospace" font-size="8" fill="#8B8D94">89 assets · 5 findings</text>
+  <rect x="24" y="268" width="355" height="28" rx="5" fill="#06B6D420" stroke="#06B6D440"/>
+  <text x="34" y="286" font-family="system-ui" font-size="10" font-weight="600" fill="#06B6D4">L3.5 Industrial DMZ</text><text x="280" y="286" font-family="monospace" font-size="8" fill="#8B8D94">24 assets · 1 finding</text>
+  <rect x="24" y="300" width="355" height="28" rx="5" fill="#14B8A610" stroke="#14B8A630"/>
+  <text x="34" y="318" font-family="system-ui" font-size="10" font-weight="600" fill="#14B8A6">L3 Site Operations</text><text x="280" y="318" font-family="monospace" font-size="8" fill="#8B8D94">156 assets · 8 findings</text>
+  <rect x="24" y="332" width="355" height="28" rx="5" fill="#22C55E10" stroke="#22C55E30"/>
+  <text x="34" y="350" font-family="system-ui" font-size="10" font-weight="600" fill="#22C55E">L2 Supervisory</text><text x="280" y="350" font-family="monospace" font-size="8" fill="#8B8D94">312 assets · 4 findings</text>
+  <rect x="24" y="364" width="355" height="28" rx="5" fill="#EAB30810" stroke="#EAB30830"/>
+  <text x="34" y="382" font-family="system-ui" font-size="10" font-weight="600" fill="#EAB308">L1 Basic Control</text><text x="280" y="382" font-family="monospace" font-size="8" fill="#8B8D94">487 assets · 12 findings</text>
+  <rect x="24" y="396" width="355" height="28" rx="5" fill="#F9731610" stroke="#F9731630"/>
+  <text x="34" y="414" font-family="system-ui" font-size="10" font-weight="600" fill="#F97316">L0 Physical Process</text><text x="280" y="414" font-family="monospace" font-size="8" fill="#8B8D94">1,251 assets · 3 findings</text>
+  <!-- Alerts -->
+  <rect x="405" y="170" width="385" height="200" rx="8" fill="#252830" stroke="#2E3038"/>
+  <text x="419" y="192" font-family="monospace" font-size="10" font-weight="700" fill="#D97706" letter-spacing="0.5">REAL-TIME ALERTS</text>
+  <circle cx="425" cy="214" r="5" fill="#EF4444"/><text x="436" y="210" font-family="monospace" font-size="8" fill="#52545C">14:23</text><text x="436" y="220" font-family="system-ui" font-size="9" font-weight="600" fill="#D4D4D8">Unauthorized Modbus Write — PLC-047</text>
+  <circle cx="425" cy="244" r="5" fill="#EF4444"/><text x="436" y="240" font-family="monospace" font-size="8" fill="#52545C">09:15</text><text x="436" y="250" font-family="system-ui" font-size="9" font-weight="600" fill="#D4D4D8">S7comm Auth Bypass Attempt — PLC-001</text>
+  <circle cx="425" cy="274" r="5" fill="#F59E0B"/><text x="436" y="270" font-family="monospace" font-size="8" fill="#52545C">07:41</text><text x="436" y="280" font-family="system-ui" font-size="9" font-weight="600" fill="#D4D4D8">Config Drift — HMI-003 Golden Image Mismatch</text>
+  <circle cx="425" cy="304" r="5" fill="#F59E0B"/><text x="436" y="300" font-family="monospace" font-size="8" fill="#52545C">04:02</text><text x="436" y="310" font-family="system-ui" font-size="9" font-weight="600" fill="#D4D4D8">Rogue Device on L2 — Baseline Violation</text>
+  <circle cx="425" cy="334" r="5" fill="#06B6D4"/><text x="436" y="330" font-family="monospace" font-size="8" fill="#52545C">02:30</text><text x="436" y="340" font-family="system-ui" font-size="9" font-weight="600" fill="#D4D4D8">JIT Vendor Session — Siemens Support</text>
+  <!-- Baselines -->
+  <rect x="405" y="380" width="385" height="130" rx="8" fill="#252830" stroke="#2E3038"/>
+  <text x="419" y="402" font-family="monospace" font-size="10" font-weight="700" fill="#D97706" letter-spacing="0.5">COMMUNICATION BASELINES</text>
+  <text x="419" y="422" font-family="system-ui" font-size="9" fill="#8B8D94">Normal L2→L1 protocols</text><text x="720" y="422" font-family="monospace" font-size="8" fill="#22C55E" text-anchor="end">Modbus, S7, EtherNet/IP ✓</text>
+  <text x="419" y="442" font-family="system-ui" font-size="9" fill="#8B8D94">Unauthorized protocol</text><text x="720" y="442" font-family="monospace" font-size="8" fill="#EF4444" text-anchor="end">SMBv1 on L2 VLAN ✗</text>
+  <text x="419" y="462" font-family="system-ui" font-size="9" fill="#8B8D94">New connections (24h)</text><text x="720" y="462" font-family="monospace" font-size="8" fill="#F59E0B" text-anchor="end">3 new pairs</text>
+  <text x="419" y="482" font-family="system-ui" font-size="9" fill="#8B8D94">Polling frequency anomaly</text><text x="720" y="482" font-family="monospace" font-size="8" fill="#22C55E" text-anchor="end">None detected ✓</text>
+</svg>
