@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ConduitShield — OT/ICS/IIoT Security Platform</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='2' fill='%23D97706'/><text x='8' y='12.5' text-anchor='middle' font-size='9' fill='%23000' font-weight='bold'>CS</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@400;600;700&family=Overpass:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#111214;--bg2:#18191D;--bg3:#1E2024;--surface:#252830;--text:#D4D4D8;--text2:#8B8D94;--text3:#52545C;
+--amber:#D97706;--amber2:#F59E0B;--amber-dim:#D9770610;--cyan:#06B6D4;--red:#EF4444;--green:#22C55E;--purple:#A855F7;
+--border:#2E3038;--mono:'Overpass Mono',monospace;--sans:'Overpass',system-ui,sans-serif}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+
+/* Login */
+#login{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;align-items:center;justify-content:center}
+#login.off{display:none}
+.login-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:36px;width:400px;max-width:92vw}
+.login-box h1{font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--amber);text-align:center;margin-bottom:2px}
+.login-box p{font-size:.75rem;color:var(--text3);text-align:center;margin-bottom:20px}
+.lf{margin-bottom:12px}
+.lf label{display:block;font-family:var(--mono);font-size:.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.lf input{width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:.82rem;outline:none}
+.lf input:focus{border-color:var(--amber)}
+.login-btn{width:100%;padding:10px;background:var(--amber);color:#000;border:none;border-radius:6px;font-family:var(--mono);font-size:.82rem;font-weight:700;cursor:pointer}
+.login-btn:hover{background:var(--amber2)}
+.login-err{color:var(--red);font-family:var(--mono);font-size:.7rem;text-align:center;margin-top:6px;min-height:14px}
+.login-demo{margin-top:14px;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-family:var(--mono);font-size:.72rem}
+.login-demo b{color:var(--amber);font-size:.6rem;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px}
+.login-demo span{color:var(--text);cursor:pointer;border:1px solid var(--border);padding:1px 6px;border-radius:3px;margin:0 2px}
+.login-demo span:hover{border-color:var(--amber);color:var(--amber)}
+
+/* App */
+#app{display:none}#app.on{display:block}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;height:48px;display:flex;align-items:center;justify-content:space-between}
+.topbar-l{display:flex;align-items:center;gap:10px}
+.brand{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--amber)}
+.brand span{color:var(--text3);font-weight:400;font-size:.65rem;margin-left:6px}
+.mode-pills{display:flex;gap:2px;background:var(--bg);border-radius:6px;padding:2px;border:1px solid var(--border)}
+.mode-pill{padding:5px 14px;border-radius:4px;font-family:var(--mono);font-size:.65rem;font-weight:600;color:var(--text3);cursor:pointer;transition:all .1s}
+.mode-pill.on{background:var(--amber);color:#000}
+.topbar-r{display:flex;align-items:center;gap:8px}
+.status{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:.62rem;color:var(--green)}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.user-btn{padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:none;font-family:var(--mono);font-size:.62rem;color:var(--text3);cursor:pointer}
+.user-btn:hover{border-color:var(--red);color:var(--red)}
+
+/* Nav */
+.nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;display:flex;gap:0;overflow-x:auto}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{padding:10px 14px;font-family:var(--mono);font-size:.65rem;font-weight:600;color:var(--text3);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .1s}
+.nav-btn:hover{color:var(--text)}
+.nav-btn.on{color:var(--amber);border-bottom-color:var(--amber)}
+
+/* Content */
+.content{max-width:1300px;margin:0 auto;padding:14px 16px 40px}
+.pg{display:none}.pg.on{display:block}
+
+/* Cards & Metrics */
+.mg{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:14px}
+@media(max-width:900px){.mg{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:500px){.mg{grid-template-columns:repeat(2,1fr)}}
+.mc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px}
+.mc-v{font-family:var(--mono);font-size:1.6rem;font-weight:700}
+.mc-l{font-size:.65rem;color:var(--text3);margin-top:2px}
+.mc-s{font-family:var(--mono);font-size:.58rem;color:var(--text3);margin-top:4px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px}
+.card-t{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--amber);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:700px){.g2,.g3{grid-template-columns:1fr}}
+.sec-h{font-family:var(--mono);font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+.sec-h::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;font-size:.75rem}
+.tbl th{text-align:left;padding:8px;font-family:var(--mono);font-size:.6rem;color:var(--amber);border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.5px}
+.tbl td{padding:8px;border-bottom:1px solid var(--border);color:var(--text2)}
+.tbl tr:hover td{background:var(--bg3)}
+.badge{display:inline-block;padding:2px 6px;border-radius:3px;font-family:var(--mono);font-size:.55rem;font-weight:600}
+.b-crit{background:#EF444420;color:#EF4444;border:1px solid #EF444430}
+.b-high{background:#F59E0B20;color:#F59E0B;border:1px solid #F59E0B30}
+.b-med{background:#06B6D420;color:#06B6D4;border:1px solid #06B6D430}
+.b-low{background:#22C55E20;color:#22C55E;border:1px solid #22C55E30}
+.b-info{background:#A855F720;color:#A855F7;border:1px solid #A855F730}
+
+/* Zone diagram */
+.zone{padding:10px 14px;border-radius:6px;margin-bottom:4px;border:1px solid;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;font-weight:600}
+.zone-sub{font-family:var(--mono);font-size:.62rem;font-weight:400;color:var(--text2)}
+
+/* Timeline */
+.tl-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.tl-dot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.tl-time{font-family:var(--mono);font-size:.6rem;color:var(--text3)}
+.tl-title{font-weight:600;font-size:.8rem;margin:1px 0}
+.tl-desc{font-size:.72rem;color:var(--text2)}
+
+/* Playbook */
+.pb-step{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.pb-num{width:28px;height:28px;border-radius:50%;background:var(--amber-dim);border:1px solid var(--amber);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--amber);flex-shrink:0}
+.pb-text{font-size:.8rem;color:var(--text2);line-height:1.6}
+
+.footer{text-align:center;padding:24px;font-family:var(--mono);font-size:.62rem;color:var(--text3);border-top:1px solid var(--border);margin-top:20px}
+.footer a{color:var(--amber);text-decoration:none}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+    <div class="login-box">
+        <h1>ConduitShield</h1>
+        <p>Passive-first cybersecurity for OT, ICS, and IIoT</p>
+        <div class="lf"><label>Username</label><input type="text" id="lu" placeholder="Enter username" autocomplete="off"></div>
+        <div class="lf"><label>Password</label><input type="password" id="lp" placeholder="Enter password"></div>
+        <button class="login-btn" onclick="doLogin()">Sign In</button>
+        <div class="login-err" id="le"></div>
+        <div class="login-demo">
+            <b>Demo Credentials</b>
+            <div style="margin:4px 0">Username: <span onclick="fill()">admin</span> Password: <span onclick="fill()">OT@Secure2025</span></div>
+            <div style="font-size:.6rem;color:var(--text3);margin-top:4px">Click to auto-fill — demo mode uses synthetic OT data</div>
+        </div>
+    </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+<div class="topbar">
+    <div class="topbar-l">
+        <span class="brand">ConduitShield <span>v1.0</span></span>
+        <div class="mode-pills">
+            <div class="mode-pill on">Discover</div>
+            <div class="mode-pill">Defend</div>
+            <div class="mode-pill">Respond</div>
+        </div>
+    </div>
+    <div class="topbar-r">
+        <div class="status"><span class="status-dot"></span>PASSIVE MODE</div>
+        <span class="user-btn" onclick="doLogout()">admin [logout]</span>
+    </div>
+</div>
+
+<div class="nav">
+    <button class="nav-btn on" onclick="go('dash',this)">Dashboard</button>
+    <button class="nav-btn" onclick="go('assets',this)">Assets</button>
+    <button class="nav-btn" onclick="go('access',this)">Access</button>
+    <button class="nav-btn" onclick="go('vuln',this)">Vulnerabilities</button>
+    <button class="nav-btn" onclick="go('iot',this)">IoT Controls</button>
+    <button class="nav-btn" onclick="go('detect',this)">Detection</button>
+    <button class="nav-btn" onclick="go('incident',this)">Incidents</button>
+    <button class="nav-btn" onclick="go('segment',this)">Segmentation</button>
+    <button class="nav-btn" onclick="go('comply',this)">Compliance</button>
+</div>
+
+<div class="content">
+
+<!-- DASHBOARD -->
+<div class="pg on" id="pg-dash">
+<div class="mg">
+    <div class="mc"><div class="mc-v" style="color:var(--amber)">2,461</div><div class="mc-l">Assets Monitored</div><div class="mc-s">PLCs, RTUs, HMIs, Sensors, Switches</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--cyan)">12</div><div class="mc-l">Zones Defined</div><div class="mc-s">ISA/IEC 62443 zones &amp; conduits</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--red)">23</div><div class="mc-l">Critical Vulns</div><div class="mc-s">Requires immediate action</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--green)">71.5%</div><div class="mc-l">Compliance</div><div class="mc-s">IEC 62443 / NIST 800-82</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--purple)">8</div><div class="mc-l">Active Sessions</div><div class="mc-s">Remote access monitored</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--green)">47</div><div class="mc-l">ATT&CK Detections</div><div class="mc-s">MITRE ICS techniques covered</div></div>
+</div>
+
+<div class="g2">
+<div class="card">
+    <div class="card-t">Purdue Model — Zone Health</div>
+    <div class="zone" style="background:#A855F710;border-color:#A855F730;color:#A855F7">L5 Enterprise <span class="zone-sub">142 assets · 2 findings</span></div>
+    <div class="zone" style="background:#3B82F610;border-color:#3B82F630;color:#3B82F6">L4 Site Business <span class="zone-sub">89 assets · 5 findings</span></div>
+    <div class="zone" style="background:#06B6D420;border-color:#06B6D440;color:#06B6D4">L3.5 DMZ <span class="zone-sub">24 assets · 1 finding</span></div>
+    <div class="zone" style="background:#14B8A610;border-color:#14B8A630;color:#14B8A6">L3 Operations <span class="zone-sub">156 assets · 8 findings</span></div>
+    <div class="zone" style="background:#22C55E10;border-color:#22C55E30;color:#22C55E">L2 Supervisory <span class="zone-sub">312 assets · 4 findings</span></div>
+    <div class="zone" style="background:#EAB30810;border-color:#EAB30830;color:#EAB308">L1 Basic Control <span class="zone-sub">487 assets · 12 findings</span></div>
+    <div class="zone" style="background:#F9731610;border-color:#F9731630;color:#F97316">L0 Physical <span class="zone-sub">1,251 assets · 3 findings</span></div>
+</div>
+<div class="card">
+    <div class="card-t">Recent Alerts (Last 24h)</div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--red)"></div><div><div class="tl-time">14:23 UTC</div><div class="tl-title">Unauthorized Modbus Write — PLC-047</div><div class="tl-desc">FC 0x06 from 10.10.8.99 (not in engineering whitelist)</div></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--red)"></div><div><div class="tl-time">09:15 UTC</div><div class="tl-title">S7comm Auth Bypass Attempt — PLC-001</div><div class="tl-desc">5 failed auth from EWS-001, account locked</div></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--amber)"></div><div><div class="tl-time">07:41 UTC</div><div class="tl-title">Config Drift — HMI-003</div><div class="tl-desc">Golden image mismatch: 12 registry changes detected</div></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--amber)"></div><div><div class="tl-time">04:02 UTC</div><div class="tl-title">New Device on L2 Network</div><div class="tl-desc">Unknown MAC 00:1A:2B:3C:4D:5E on VLAN 120</div></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--cyan)"></div><div><div class="tl-time">02:30 UTC</div><div class="tl-title">Vendor Remote Session</div><div class="tl-desc">Siemens support — PLC-001 firmware check — approved by OT-Admin</div></div></div>
+</div>
+</div>
+</div>
+
+<!-- ASSETS -->
+<div class="pg" id="pg-assets">
+<div class="sec-h">Asset Intelligence — Passive Discovery</div>
+<div class="mg" style="grid-template-columns:repeat(5,1fr)">
+    <div class="mc"><div class="mc-v" style="color:var(--amber)">2,461</div><div class="mc-l">Total Assets</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--green)">2,318</div><div class="mc-l">Online</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--red)">67</div><div class="mc-l">Vulnerable</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--purple)">18</div><div class="mc-l">End-of-Life</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--cyan)">12</div><div class="mc-l">Protocols</div></div>
+</div>
+<div class="card">
+    <div class="card-t">Discovered Asset Inventory</div>
+    <div style="overflow-x:auto"><table class="tbl">
+        <thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Vendor</th><th>Firmware</th><th>Protocol</th><th>Zone</th><th>IP</th><th>Status</th></tr></thead>
+        <tbody>
+        <tr><td>PLC-001</td><td>Main Process Controller</td><td>PLC</td><td>Siemens S7-1500</td><td>V2.9.7</td><td>S7comm+</td><td>L1</td><td>10.10.1.10</td><td><span class="badge b-low">ONLINE</span></td></tr>
+        <tr><td>PLC-002</td><td>Water Treatment PLC</td><td>PLC</td><td>Allen-Bradley</td><td>V33.011</td><td>EtherNet/IP</td><td>L1</td><td>10.10.1.11</td><td><span class="badge b-crit">VULN</span></td></tr>
+        <tr><td>RTU-001</td><td>Substation RTU</td><td>RTU</td><td>GE D400</td><td>V8.1</td><td>DNP3</td><td>L1</td><td>10.10.2.20</td><td><span class="badge b-low">ONLINE</span></td></tr>
+        <tr><td>SIS-001</td><td>Safety System</td><td>SIS</td><td>Triconex 3008</td><td>V10.6</td><td>TriStation</td><td>L1</td><td>10.10.1.100</td><td><span class="badge b-low">ONLINE</span></td></tr>
+        <tr><td>HMI-001</td><td>Operator Station 1</td><td>HMI</td><td>Wonderware</td><td>2023 R1</td><td>OPC UA</td><td>L2</td><td>10.10.3.30</td><td><span class="badge b-high">PATCH</span></td></tr>
+        <tr><td>DCS-001</td><td>Yokogawa CENTUM</td><td>DCS</td><td>Yokogawa</td><td>R6.09</td><td>OPC UA</td><td>L1</td><td>10.10.1.200</td><td><span class="badge b-low">ONLINE</span></td></tr>
+        <tr><td>SRV-001</td><td>SCADA Server</td><td>Server</td><td>AVEVA</td><td>2023.1</td><td>Modbus</td><td>L3</td><td>10.10.4.41</td><td><span class="badge b-crit">VULN</span></td></tr>
+        <tr><td>FW-001</td><td>OT Firewall</td><td>Firewall</td><td>Palo Alto</td><td>11.1.2</td><td>—</td><td>DMZ</td><td>10.10.5.1</td><td><span class="badge b-low">ONLINE</span></td></tr>
+        <tr><td>SW-001</td><td>Industrial Switch</td><td>Switch</td><td>Hirschmann</td><td>9.4.2</td><td>SNMP</td><td>L2</td><td>10.10.3.1</td><td><span class="badge b-high">PATCH</span></td></tr>
+        <tr><td>IOT-001</td><td>MQTT Broker</td><td>Broker</td><td>Mosquitto</td><td>V2.0.18</td><td>MQTT</td><td>L3</td><td>10.10.9.10</td><td><span class="badge b-med">MONITOR</span></td></tr>
+        </tbody>
+    </table></div>
+</div>
+</div>
+
+<!-- ACCESS -->
+<div class="pg" id="pg-access">
+<div class="sec-h">Identity, Access &amp; Remote Operations</div>
+<div class="mg" style="grid-template-columns:repeat(4,1fr)">
+    <div class="mc"><div class="mc-v" style="color:var(--amber)">8</div><div class="mc-l">Active Remote Sessions</div><div class="mc-s">JIT access enforced</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--green)">100%</div><div class="mc-l">MFA Enforced</div><div class="mc-s">All remote access</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--red)">3</div><div class="mc-l">Default Creds Found</div><div class="mc-s">Remediation required</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--cyan)">156</div><div class="mc-l">Session Recordings</div><div class="mc-s">Last 30 days</div></div>
+</div>
+<div class="g2">
+<div class="card">
+    <div class="card-t">Active Remote Sessions</div>
+    <table class="tbl"><thead><tr><th>User</th><th>Role</th><th>Target</th><th>Start</th><th>MFA</th><th>Recording</th></tr></thead><tbody>
+    <tr><td>siemens-support</td><td>Vendor</td><td>PLC-001</td><td>14:10 UTC</td><td><span class="badge b-low">YES</span></td><td><span class="badge b-info">REC</span></td></tr>
+    <tr><td>ot-admin-1</td><td>Engineer</td><td>EWS-001</td><td>13:45 UTC</td><td><span class="badge b-low">YES</span></td><td><span class="badge b-info">REC</span></td></tr>
+    <tr><td>vendor-abb</td><td>Vendor</td><td>RTU-002</td><td>12:30 UTC</td><td><span class="badge b-low">YES</span></td><td><span class="badge b-info">REC</span></td></tr>
+    </tbody></table>
+</div>
+<div class="card">
+    <div class="card-t">Default Credential Alerts</div>
+    <table class="tbl"><thead><tr><th>Device</th><th>Protocol</th><th>Credential</th><th>Risk</th><th>Status</th></tr></thead><tbody>
+    <tr><td>SW-003 (Moxa)</td><td>SNMP</td><td>Community: public</td><td><span class="badge b-crit">CRITICAL</span></td><td>Open</td></tr>
+    <tr><td>IOT-012</td><td>MQTT</td><td>admin:admin</td><td><span class="badge b-crit">CRITICAL</span></td><td>Open</td></tr>
+    <tr><td>CAM-005</td><td>HTTP</td><td>admin:123456</td><td><span class="badge b-high">HIGH</span></td><td>Open</td></tr>
+    </tbody></table>
+</div>
+</div>
+</div>
+
+<!-- VULNERABILITIES -->
+<div class="pg" id="pg-vuln">
+<div class="sec-h">Vulnerability, Patch &amp; Exposure Management</div>
+<div class="mg" style="grid-template-columns:repeat(5,1fr)">
+    <div class="mc"><div class="mc-v" style="color:var(--red)">23</div><div class="mc-l">Critical</div><div class="mc-s">CVSS 9.0+</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--amber)">67</div><div class="mc-l">High</div><div class="mc-s">CVSS 7.0-8.9</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--cyan)">142</div><div class="mc-l">Medium</div><div class="mc-s">CVSS 4.0-6.9</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--purple)">18</div><div class="mc-l">EOL Systems</div><div class="mc-s">Unsupported OS/FW</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--green)">89%</div><div class="mc-l">Patch Current</div><div class="mc-s">Within SLA</div></div>
+</div>
+<div class="card">
+    <div class="card-t">ICS-CERT Advisories Matched to Inventory</div>
+    <table class="tbl"><thead><tr><th>CVE</th><th>Affected</th><th>CVSS</th><th>Assets</th><th>Patch</th><th>Status</th></tr></thead><tbody>
+    <tr><td>CVE-2023-28489</td><td>Siemens S7-1500</td><td><span class="badge b-crit">9.8</span></td><td>3</td><td>V3.0.1</td><td>Scheduled</td></tr>
+    <tr><td>CVE-2022-1159</td><td>Rockwell CompactLogix</td><td><span class="badge b-high">8.6</span></td><td>7</td><td>V34.011</td><td>Testing</td></tr>
+    <tr><td>CVE-2023-34360</td><td>AVEVA SCADA</td><td><span class="badge b-high">8.1</span></td><td>2</td><td>2023.2</td><td>Open</td></tr>
+    <tr><td>CVE-2023-0955</td><td>JCI BMS</td><td><span class="badge b-med">6.5</span></td><td>4</td><td>V4.4</td><td>Compensating</td></tr>
+    <tr><td>CVE-2022-38152</td><td>Moxa EDS-516A</td><td><span class="badge b-high">7.5</span></td><td>8</td><td>V3.11</td><td>Open</td></tr>
+    <tr><td>CVE-2023-28366</td><td>Eclipse Mosquitto</td><td><span class="badge b-med">5.3</span></td><td>1</td><td>V2.0.19</td><td>Patched</td></tr>
+    </tbody></table>
+</div>
+</div>
+
+<!-- IOT CONTROLS -->
+<div class="pg" id="pg-iot">
+<div class="sec-h">IoT Security Controls &amp; Device Lifecycle</div>
+<div class="mg" style="grid-template-columns:repeat(4,1fr)">
+    <div class="mc"><div class="mc-v" style="color:var(--amber)">847</div><div class="mc-l">IoT Devices</div><div class="mc-s">Sensors, actuators, gateways</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--green)">92%</div><div class="mc-l">Secure Config</div><div class="mc-s">Baseline compliant</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--red)">14</div><div class="mc-l">Cert Expiring</div><div class="mc-s">Within 30 days</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--cyan)">100%</div><div class="mc-l">Encrypted Transit</div><div class="mc-s">TLS/DTLS enforced</div></div>
+</div>
+<div class="g2">
+<div class="card">
+    <div class="card-t">Device Onboarding Queue</div>
+    <table class="tbl"><thead><tr><th>Device</th><th>Type</th><th>Status</th><th>Checks</th></tr></thead><tbody>
+    <tr><td>TEMP-094</td><td>Temperature Sensor</td><td><span class="badge b-high">PENDING</span></td><td>Default creds ✗ | Cert ✗ | Config ✗</td></tr>
+    <tr><td>FLOW-027</td><td>Flow Meter</td><td><span class="badge b-med">IN PROGRESS</span></td><td>Default creds ✓ | Cert ✓ | Config ✗</td></tr>
+    <tr><td>VIB-011</td><td>Vibration Sensor</td><td><span class="badge b-low">APPROVED</span></td><td>Default creds ✓ | Cert ✓ | Config ✓</td></tr>
+    </tbody></table>
+</div>
+<div class="card">
+    <div class="card-t">Firmware Update Status</div>
+    <table class="tbl"><thead><tr><th>Device Class</th><th>Current</th><th>Available</th><th>Signed</th><th>Status</th></tr></thead><tbody>
+    <tr><td>Siemens S7-1500</td><td>V2.9.7</td><td>V3.0.1</td><td><span class="badge b-low">YES</span></td><td>Scheduled</td></tr>
+    <tr><td>Moxa EDS-516A</td><td>V3.10</td><td>V3.11</td><td><span class="badge b-low">YES</span></td><td>Testing</td></tr>
+    <tr><td>Mosquitto MQTT</td><td>V2.0.18</td><td>V2.0.19</td><td><span class="badge b-low">YES</span></td><td>Approved</td></tr>
+    </tbody></table>
+</div>
+</div>
+</div>
+
+<!-- DETECTION -->
+<div class="pg" id="pg-detect">
+<div class="sec-h">Detection Engineering &amp; MITRE ATT&CK for ICS</div>
+<div class="mg" style="grid-template-columns:repeat(4,1fr)">
+    <div class="mc"><div class="mc-v" style="color:var(--amber)">47</div><div class="mc-l">ATT&CK Techniques</div><div class="mc-s">ICS matrix coverage</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--red)">156</div><div class="mc-l">Alerts (24h)</div><div class="mc-s">12 critical, 28 high</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--green)">98.2%</div><div class="mc-l">Log Coverage</div><div class="mc-s">All zones reporting</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--cyan)">8</div><div class="mc-l">Hunting Queries</div><div class="mc-s">Active this month</div></div>
+</div>
+<div class="card">
+    <div class="card-t">ATT&CK for ICS — Detection Coverage</div>
+    <table class="tbl"><thead><tr><th>Technique</th><th>ID</th><th>Tactic</th><th>Detections</th><th>Last Triggered</th></tr></thead><tbody>
+    <tr><td>Unauthorized Command Message</td><td>T0855</td><td>Impair Process</td><td>3 rules</td><td>14:23 UTC today</td></tr>
+    <tr><td>Program Upload</td><td>T0845</td><td>Lateral Movement</td><td>2 rules</td><td>Yesterday</td></tr>
+    <tr><td>Modify Controller Tasking</td><td>T0821</td><td>Execution</td><td>4 rules</td><td>3 days ago</td></tr>
+    <tr><td>Remote System Discovery</td><td>T0846</td><td>Discovery</td><td>2 rules</td><td>Today 04:02</td></tr>
+    <tr><td>Exploitation of Remote Services</td><td>T0866</td><td>Initial Access</td><td>5 rules</td><td>5 days ago</td></tr>
+    <tr><td>Default Credentials</td><td>T0812</td><td>Initial Access</td><td>3 rules</td><td>Today 09:15</td></tr>
+    <tr><td>Denial of Service</td><td>T0814</td><td>Inhibit Response</td><td>2 rules</td><td>7 days ago</td></tr>
+    <tr><td>Man in the Middle</td><td>T0830</td><td>Collection</td><td>1 rule</td><td>12 days ago</td></tr>
+    </tbody></table>
+</div>
+</div>
+
+<!-- INCIDENTS -->
+<div class="pg" id="pg-incident">
+<div class="sec-h">Incident Response &amp; Recovery</div>
+<div class="mg" style="grid-template-columns:repeat(4,1fr)">
+    <div class="mc"><div class="mc-v" style="color:var(--red)">2</div><div class="mc-l">Open Critical</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--amber)">5</div><div class="mc-l">Open High</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--green)">14</div><div class="mc-l">Resolved (30d)</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--cyan)">4.2h</div><div class="mc-l">Avg Response</div></div>
+</div>
+<div class="g2">
+<div class="card">
+    <div class="card-t">Active Incidents</div>
+    <table class="tbl"><thead><tr><th>ID</th><th>Title</th><th>Severity</th><th>Zone</th><th>Status</th></tr></thead><tbody>
+    <tr><td>INC-2024-089</td><td>Unauthorized Modbus Write to PLC-047</td><td><span class="badge b-crit">P1</span></td><td>L1</td><td>Containment</td></tr>
+    <tr><td>INC-2024-088</td><td>S7comm Brute Force — PLC-001</td><td><span class="badge b-crit">P1</span></td><td>L1</td><td>Investigation</td></tr>
+    <tr><td>INC-2024-087</td><td>Rogue Device on L2 VLAN</td><td><span class="badge b-high">P2</span></td><td>L2</td><td>Triage</td></tr>
+    <tr><td>INC-2024-086</td><td>Config Drift — 3 HMI Stations</td><td><span class="badge b-high">P2</span></td><td>L2</td><td>Remediation</td></tr>
+    </tbody></table>
+</div>
+<div class="card">
+    <div class="card-t">OT Playbook — Unauthorized PLC Write</div>
+    <div class="pb-step"><div class="pb-num">1</div><div><div class="pb-text"><strong>Isolate:</strong> Block source IP at zone firewall. Do NOT power cycle the PLC — verify process state first.</div></div></div>
+    <div class="pb-step"><div class="pb-num">2</div><div><div class="pb-text"><strong>Verify:</strong> Compare current PLC program against golden backup. Check for logic modifications or parameter changes.</div></div></div>
+    <div class="pb-step"><div class="pb-num">3</div><div><div class="pb-text"><strong>Preserve:</strong> Capture network traffic, PLC program state, and all access logs. Maintain chain of custody.</div></div></div>
+    <div class="pb-step"><div class="pb-num">4</div><div><div class="pb-text"><strong>Assess:</strong> Determine if process was affected. Engage operations team to verify physical process is safe.</div></div></div>
+    <div class="pb-step"><div class="pb-num">5</div><div><div class="pb-text"><strong>Restore:</strong> If compromised, restore from verified backup. Re-enable monitoring before returning to service.</div></div></div>
+    <div class="pb-step"><div class="pb-num">6</div><div><div class="pb-text"><strong>Report:</strong> Notify CISO, plant manager, and regulators if required. Document timeline and lessons learned.</div></div></div>
+</div>
+</div>
+</div>
+
+<!-- SEGMENTATION -->
+<div class="pg" id="pg-segment">
+<div class="sec-h">Segmentation &amp; Zone/Conduit Policy</div>
+<div class="mg" style="grid-template-columns:repeat(4,1fr)">
+    <div class="mc"><div class="mc-v" style="color:var(--amber)">12</div><div class="mc-l">Zones Defined</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--cyan)">34</div><div class="mc-l">Conduits</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--red)">7</div><div class="mc-l">Policy Violations</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--green)">93%</div><div class="mc-l">Compliant Traffic</div></div>
+</div>
+<div class="card">
+    <div class="card-t">Zone/Conduit Policy Enforcement</div>
+    <table class="tbl"><thead><tr><th>Conduit</th><th>Source</th><th>Dest</th><th>Allowed</th><th>Violations</th><th>Status</th></tr></thead><tbody>
+    <tr><td>C-01</td><td>L3 Operations</td><td>L2 Supervisory</td><td>OPC UA :4840, Modbus :502</td><td>0</td><td><span class="badge b-low">OK</span></td></tr>
+    <tr><td>C-02</td><td>L4 Business</td><td>L3.5 DMZ</td><td>HTTPS :443 only</td><td>0</td><td><span class="badge b-low">OK</span></td></tr>
+    <tr><td>C-03</td><td>L3.5 DMZ</td><td>L3 Operations</td><td>OPC UA :4840 (read-only)</td><td>2</td><td><span class="badge b-high">ALERT</span></td></tr>
+    <tr><td>C-04</td><td>L5 Enterprise</td><td>L3.5 DMZ</td><td>Jump Host :22 (MFA)</td><td>0</td><td><span class="badge b-low">OK</span></td></tr>
+    <tr><td>C-05</td><td>L2 Supervisory</td><td>L1 Control</td><td>S7comm :102, EtherNet/IP :44818</td><td>5</td><td><span class="badge b-crit">BREACH</span></td></tr>
+    <tr><td>C-06</td><td>External VPN</td><td>L3.5 DMZ</td><td>IPSec VPN (JIT only)</td><td>0</td><td><span class="badge b-low">OK</span></td></tr>
+    </tbody></table>
+</div>
+</div>
+
+<!-- COMPLIANCE -->
+<div class="pg" id="pg-comply">
+<div class="sec-h">Governance, Compliance &amp; Audit Evidence</div>
+<div class="mg" style="grid-template-columns:repeat(4,1fr)">
+    <div class="mc"><div class="mc-v" style="color:var(--amber)">71.5%</div><div class="mc-l">Overall Compliance</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--green)">892</div><div class="mc-l">Controls Implemented</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--red)">23</div><div class="mc-l">Critical Gaps</div></div>
+    <div class="mc"><div class="mc-v" style="color:var(--cyan)">1,247</div><div class="mc-l">Total Controls</div></div>
+</div>
+<div class="card">
+    <div class="card-t">Framework Compliance Status</div>
+    <table class="tbl"><thead><tr><th>Standard</th><th>Version</th><th>Score</th><th>Implemented</th><th>Gaps</th></tr></thead><tbody>
+    <tr><td style="font-weight:600">ISA/IEC 62443</td><td>2018</td><td><span class="badge b-high">68%</span></td><td>204 / 300</td><td>96</td></tr>
+    <tr><td style="font-weight:600">NIST SP 800-82</td><td>Rev 3</td><td><span class="badge b-med">75%</span></td><td>188 / 250</td><td>62</td></tr>
+    <tr><td style="font-weight:600">NERC CIP</td><td>v7</td><td><span class="badge b-low">82%</span></td><td>164 / 200</td><td>36</td></tr>
+    <tr><td style="font-weight:600">MITRE ATT&CK ICS</td><td>v14</td><td><span class="badge b-low">84%</span></td><td>47 / 56</td><td>9</td></tr>
+    <tr><td style="font-weight:600">CIS Controls</td><td>v8.1</td><td><span class="badge b-med">74%</span></td><td>133 / 180</td><td>47</td></tr>
+    <tr><td style="font-weight:600">CISA ICS Guidelines</td><td>2024</td><td><span class="badge b-high">65%</span></td><td>156 / 240</td><td>84</td></tr>
+    </tbody></table>
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+    ConduitShield v1.0 — Passive-first cybersecurity for OT, ICS, and IIoT<br>
+    ISA/IEC 62443 · NIST SP 800-82 · NERC CIP · MITRE ATT&CK for ICS · CISA<br>
+    <a href="https://github.com/SiteQ8/ConduitShield">GitHub</a> · <a href="https://github.com/SiteQ8">@SiteQ8</a> — Ali AlEnezi · MIT License
+</div>
+</div>
+
+<script>
+function fill(){document.getElementById('lu').value='admin';document.getElementById('lp').value='OT@Secure2025'}
+function doLogin(){
+    const u=document.getElementById('lu').value,p=document.getElementById('lp').value;
+    if(u==='admin'&&p==='OT@Secure2025'){document.getElementById('login').classList.add('off');document.getElementById('app').classList.add('on')}
+    else{document.getElementById('le').textContent=u||p?'Invalid credentials. Use demo account.':'Enter credentials.'}
+}
+function doLogout(){document.getElementById('login').classList.remove('off');document.getElementById('app').classList.remove('on');document.getElementById('lu').value='';document.getElementById('lp').value='';document.getElementById('le').textContent=''}
+document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+document.getElementById('lu').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('lp').focus()});
+function go(id,btn){document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));document.getElementById('pg-'+id).classList.add('on');btn.classList.add('on')}
+document.querySelectorAll('.mode-pill').forEach(p=>p.addEventListener('click',function(){document.querySelectorAll('.mode-pill').forEach(x=>x.classList.remove('on'));this.classList.add('on')}));
+</script>
+</body>
+</html>

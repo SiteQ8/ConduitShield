@@ -1,0 +1,30 @@
+<svg width="900" height="220" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="220" fill="#111214"/>
+  <rect x="0" y="0" width="900" height="3" fill="#D97706"/>
+  <rect x="0" y="217" width="900" height="3" fill="#D97706" opacity="0.3"/>
+  <!-- Grid -->
+  <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="none" stroke="#2E3038" stroke-width="0.3"/></pattern>
+  <rect width="900" height="220" fill="url(#g)" opacity="0.4"/>
+  <!-- Content -->
+  <text x="40" y="50" font-family="monospace" font-size="11" fill="#D97706" letter-spacing="3" font-weight="600">PASSIVE-FIRST CYBERSECURITY FOR OT, ICS, AND IIOT</text>
+  <text x="40" y="95" font-family="system-ui,sans-serif" font-size="46" fill="#FFFFFF" font-weight="800" letter-spacing="-1">ConduitShield</text>
+  <text x="40" y="125" font-family="monospace" font-size="12" fill="#8B8D94">Zones &amp; Conduits Security Platform — ISA/IEC 62443 Native</text>
+  <!-- Mode pills -->
+  <rect x="40" y="145" width="80" height="24" rx="4" fill="#D97706"/><text x="80" y="161" text-anchor="middle" font-family="monospace" font-size="9" fill="#000" font-weight="700">DISCOVER</text>
+  <rect x="128" y="145" width="72" height="24" rx="4" fill="#D9770620" stroke="#D97706" stroke-width="0.8"/><text x="164" y="161" text-anchor="middle" font-family="monospace" font-size="9" fill="#D97706" font-weight="600">DEFEND</text>
+  <rect x="208" y="145" width="80" height="24" rx="4" fill="#D9770620" stroke="#D97706" stroke-width="0.8"/><text x="248" y="161" text-anchor="middle" font-family="monospace" font-size="9" fill="#D97706" font-weight="600">RESPOND</text>
+  <!-- Features -->
+  <text x="40" y="195" font-family="monospace" font-size="9" fill="#52545C" letter-spacing="0.5">ASSET DISCOVERY · VULNERABILITY MGMT · MITRE ATT&amp;CK ICS · INCIDENT RESPONSE · ZONE/CONDUIT POLICY · IOT LIFECYCLE</text>
+  <text x="40" y="210" font-family="monospace" font-size="8" fill="#52545C" letter-spacing="0.5">ISA/IEC 62443 · NIST SP 800-82 · NERC CIP · CISA · 9 Dashboards · On-premises · @SiteQ8 — Ali AlEnezi · MIT</text>
+  <!-- Right side graphic -->
+  <g transform="translate(700,60)" opacity="0.15">
+    <rect x="0" y="0" width="160" height="100" rx="6" fill="none" stroke="#D97706" stroke-width="1"/>
+    <line x1="0" y1="30" x2="160" y2="30" stroke="#D97706" stroke-width="0.5"/>
+    <line x1="0" y1="55" x2="160" y2="55" stroke="#D97706" stroke-width="0.5"/>
+    <line x1="0" y1="75" x2="160" y2="75" stroke="#D97706" stroke-width="0.5"/>
+    <text x="10" y="18" font-family="monospace" font-size="8" fill="#D97706">L5 ENTERPRISE</text>
+    <text x="10" y="45" font-family="monospace" font-size="8" fill="#D97706">L3 OPERATIONS</text>
+    <text x="10" y="68" font-family="monospace" font-size="8" fill="#D97706">L2 SUPERVISORY</text>
+    <text x="10" y="90" font-family="monospace" font-size="8" fill="#D97706">L1/L0 CONTROL</text>
+  </g>
+</svg>
