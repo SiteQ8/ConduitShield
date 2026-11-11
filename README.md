@@ -23,17 +23,17 @@
 
 ## Why ConduitShield
 
-APIs are the #1 attack vector in IT. In OT, the attack surface is the **protocol layer** — Modbus writes, S7comm uploads, DNP3 commands — where a single unauthorized change can halt a plant or endanger safety.
+APIs are the #1 attack vector in IT. In OT, the attack surface is the **protocol layer**, Modbus writes, S7comm uploads, DNP3 commands, where a single unauthorized change can halt a plant or endanger safety.
 
 Most cybersecurity tools are built for IT and retrofitted for OT. They actively scan, ignore zones and conduits, treat the plant like a flat LAN, and have no awareness of operational safety.
 
 ConduitShield is **built for OT from the ground up**:
 
-- **Passive-first** — SPAN/TAP visibility, no active scanning unless explicitly approved during a maintenance window
-- **Zones & conduits native** — ISA/IEC 62443 segmentation is a first-class concept, not a report add-on
-- **Safety-aware** — response automation never disrupts operations without explicit policy gates
-- **OT protocol parsing** — Modbus, DNP3, S7comm, EtherNet/IP, OPC UA, BACnet, IEC 104, MQTT, CoAP
-- **Three operational modes** — Discover, Defend, Respond — matching how OT security programs mature
+- **Passive-first**: SPAN/TAP visibility, no active scanning unless explicitly approved during a maintenance window
+- **Zones & conduits native**: ISA/IEC 62443 segmentation is a first-class concept, not a report add-on
+- **Safety-aware**: response automation never disrupts operations without explicit policy gates
+- **OT protocol parsing**: Modbus, DNP3, S7comm, EtherNet/IP, OPC UA, BACnet, IEC 104, MQTT, CoAP
+- **Three operational modes**: Discover, Defend, Respond, matching how OT security programs mature
 
 ---
 
@@ -51,19 +51,19 @@ ConduitShield is **built for OT from the ground up**:
 
 ### Login Screen
 
-<img src="docs/screenshots/login.svg" width="100%" alt="ConduitShield — Login"/>
+<img src="docs/screenshots/login.svg" width="100%" alt="ConduitShield: Login"/>
 
 > Demo credentials with click-to-fill. Certificate-backed device trust. Three operational modes: Discover, Defend, Respond.
 
-### Security Overview — Purdue Model, Alerts, Baselines
+### Security Overview: Purdue Model, Alerts, Baselines
 
-<img src="docs/screenshots/overview.svg" width="100%" alt="ConduitShield — Overview"/>
+<img src="docs/screenshots/overview.svg" width="100%" alt="ConduitShield: Overview"/>
 
 > Real-time security posture across 7 Purdue zones (L0-L5 + DMZ). Communication baselines detect unauthorized protocols, rogue devices, and polling anomalies. 2,461 monitored assets with 12 zones and 34 conduits.
 
-### Incident Response — OT Playbooks, Evidence Locker, Contact Tree
+### Incident Response: OT Playbooks, Evidence Locker, Contact Tree
 
-<img src="docs/screenshots/incident.svg" width="100%" alt="ConduitShield — Incident Response"/>
+<img src="docs/screenshots/incident.svg" width="100%" alt="ConduitShield: Incident Response"/>
 
 > Safety-aware 6-step playbook for unauthorized PLC writes with explicit safety gates. Evidence locker with chain of custody (PCAPs, logs, PLC state, timelines). Contact tree with SLA times for operations, CISO, vendors, integrators, legal, and external IR.
 
@@ -149,7 +149,7 @@ ConduitShield Platform
 | Standard | Version | Coverage |
 |----------|---------|----------|
 | **ISA/IEC 62443** | 2018 | Zones/conduits, security levels, system requirements, component requirements |
-| **NIST SP 800-82** | Rev 3 | OT security guide — network architecture, access control, monitoring |
+| **NIST SP 800-82** | Rev 3 | OT security guide, network architecture, access control, monitoring |
 | **NERC CIP** | v7 | Critical infrastructure protection for bulk electric systems |
 | **MITRE ATT&CK for ICS** | v14 | 47 techniques mapped with detection rules and hunting queries |
 | **CIS Controls** | v8.1 | Implementation groups 1-3 mapped to OT context |
@@ -172,8 +172,8 @@ ConduitShield Platform
 | MQTT | 1883 | ISO/IEC 20922 | IoT sensors, telemetry |
 | CoAP | 5683 | RFC 7252 | Constrained IoT devices |
 | TriStation | 1502 | Schneider | Safety instrumented systems |
-| PROFINET | — | IEC 61158 | Siemens automation |
-| Foundation Fieldbus | — | IEC 61158 | Process instrumentation |
+| PROFINET |: | IEC 61158 | Siemens automation |
+| Foundation Fieldbus |: | IEC 61158 | Process instrumentation |
 
 ---
 
@@ -246,12 +246,12 @@ Based on NIST, CISA, and ISA/IEC 62443 guidance, ConduitShield is designed to av
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).
 
 ---
 
 <div align="center">
-  <sub>ConduitShield — Passive-first cybersecurity for OT, ICS, and IIoT</sub><br>
+  <sub>ConduitShield, Passive-first cybersecurity for OT, ICS, and IIoT</sub><br>
   <sub>ISA/IEC 62443 · NIST SP 800-82 · NERC CIP · MITRE ATT&CK for ICS · CISA</sub><br>
-  <sub><a href="https://github.com/SiteQ8">@SiteQ8</a> — Ali AlEnezi</sub>
+  <sub><a href="https://github.com/SiteQ8">@SiteQ8</a>, Ali AlEnezi</sub>
 </div>
